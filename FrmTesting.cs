@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DelegateTesting
@@ -13,40 +6,26 @@ namespace DelegateTesting
     public partial class FrmTesting : Form
     {
         delegate void MyDelegateInt(int t);
-
+        ListBoxPrint P;
         public FrmTesting() { InitializeComponent(); }
-
-        private void MyFirstMethod(int w) { LbxOutput.Items.Add($"My First Method = {w * 2}"); }
-        private void MySecondMethod(int w) { LbxOutput.Items.Add($"My Second Method = {w * 4}"); }
 
         private void BtnClick_Click(object sender, EventArgs e)
         {
+            P = new ListBoxPrint(LbxOutput);
             MyDelegateInt delOne = MyFirstMethod;
             MyDelegateInt delTwo = MySecondMethod;
 
-            int a = 5;
-            delOne.Invoke(a); LbxOutput.Items.Add("");
-
-            int b = 9;
-            delTwo.Invoke(b); LbxOutput.Items.Add("");
-
-            int x = 8;
-            AnotherMethod(x, delOne); LbxOutput.Items.Add("");
-
-            int y = 16;
-            AnotherMethod(y, delTwo); LbxOutput.Items.Add("");
+            int a = 5; delOne.Invoke(a);
+            int b = 9; delTwo.Invoke(b);
+            int x = 8; AnotherMethod(x, delOne);
+            int y = 16; AnotherMethod(y, delTwo);
         }
-
-        private void AnotherMethod(int x, Delegate y)
+        private void MyFirstMethod(int w) { P.Print($"My First Method = {w * 2}"); P.Print(); }
+        private void MySecondMethod(int w) { P.Print($"My Second Method = {w * 4}"); P.Print(); }
+        private void AnotherMethod(int x, MyDelegateInt y)
         {
-            LbxOutput.Items.Add($"AnotherMethod = {x}");
-            y.DynamicInvoke(x);
+            P.Print($"AnotherMethod = {x}");
+            y.Invoke(x);          //  y.DynamicInvoke(x);
         }
     }
-
-
-
-
-
-
 }
