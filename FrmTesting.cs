@@ -7,6 +7,7 @@ namespace DelegateTesting
     {
         delegate void MyDelegateInt(int t);
         ListBoxPrint P;
+
         public FrmTesting() { InitializeComponent(); }
 
         private void BtnClick_Click(object sender, EventArgs e)
