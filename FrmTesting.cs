@@ -12,8 +12,8 @@ namespace DelegateTesting
         private void BtnClick_Click(object sender, EventArgs e)
         {
             P = new ListBoxPrint(LbxOutput);
-            MyDelegateInt delOne = MyFirstMethod;
-            MyDelegateInt delTwo = MySecondMethod;
+            MyDelegateInt delOne = this.MyFirstMethod;
+            MyDelegateInt delTwo = this.MySecondMethod;
 
             int a = 5; delOne.Invoke(a);
             int b = 9; delTwo.Invoke(b);
